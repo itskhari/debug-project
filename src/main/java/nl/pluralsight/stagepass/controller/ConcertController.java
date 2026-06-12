@@ -33,6 +33,20 @@ public class ConcertController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/artist/{artistId}")
+    public ResponseEntity<List<Concert>> getConcertsByArtist(@PathVariable Long artistId) {
+        List<Concert> concerts = concertService.getConcertsByArtist(artistId);
+        return ResponseEntity.ok(concerts);
+    }
+    // feature 2 artist id endpoint -> api/artist
+
+    @GetMapping("/upcoming")
+    public ResponseEntity<List<Concert>> getUpcomingConcerts() {
+        List<Concert> concerts = concertService.getUpcomingConcerts();
+        return ResponseEntity.ok(concerts);
+    }
+    // feature 3 upcoming date endpoint -> api/upcoming
+
     @PostMapping
     public ResponseEntity<Concert> createConcert(@RequestBody Concert concert) {
         Concert created = concertService.createConcert(concert);

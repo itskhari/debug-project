@@ -9,4 +9,9 @@ import java.util.List;
 
 @Repository
 public interface ConcertRepository extends JpaRepository<Concert, Long> {
+    List<Concert> findByArtistId(Long artistID);
+    // changed this, this is basically just select * from artistId
+
+    List<Concert> findByDateAfterOrderByDateAsc(LocalDate date);
+    // select * from concerts where date > ? order by date acs
 }

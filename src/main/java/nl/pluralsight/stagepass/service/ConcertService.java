@@ -25,6 +25,16 @@ public class ConcertService {
         return concertRepository.findById(id);
     }
 
+    public List<Concert> getConcertsByArtist(Long artistId) {
+        return concertRepository.findByArtistId(artistId);
+    }
+    // created new field for the concert service layer
+
+    public List<Concert> getUpcomingConcerts() {
+        return concertRepository.findByDateAfterOrderByDateAsc(LocalDate.now());
+    }
+    // another field but for feature 3
+
     public Concert createConcert(Concert concert) {
         return concertRepository.save(concert);
     }

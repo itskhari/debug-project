@@ -42,6 +42,11 @@ public class BookingService {
         Concert concert = concertRepository.findById(booking.getConcert().getId())
                 .orElseThrow(() -> new RuntimeException("Concert not found"));
 
+        // feature 1 - seat checking
+        if (concert.getAvailableSeats() < booking.getNumberOfTickets()) {
+            throw new InsufficientSeatsException("Not enough seats available");
+        }
+
         // Compute total price
         BigDecimal total = concert.getTicketPrice().multiply(BigDecimal.valueOf(booking.getNumberOfTickets()));
         // big decimal was originally setting this value to zero, so I looked up how to incorporate ticketprice * numoftickets
